@@ -8,18 +8,12 @@ window.onload=function init(){
   document.querySelector('#clearButton').addEventListener('click', clear);
 
 
-
-  function search(){
-    let queryUrl='https://gist.githubusercontent.com/heiswayi/7fde241975ed8a80535a/raw/ff1caaeaf62bd6740ab7cafcd61f1215de173379/datatables-data.json';
-    let xhr= new XMLHttpRequest();
-    xhr.open('GET',queryUrl,true);
-    xhr.onload=function(e){
-      console.log('got');
-      let jsonResponse=xhr.response;
-      let data=JSON.parse(jsonResponse).data;
-      displayAsTable(data);
+  
+  async function search(){
+    let res= await fetch('https://gist.githubusercontent.com/heiswayi/7fde241975ed8a80535a/raw/ff1caaeaf62bd6740ab7cafcd61f1215de173379/datatables-data.json')
+    let data= await res.json()
+      displayAsTable(data.data);
     }
-    xhr.send();
   }
 
 
@@ -47,5 +41,3 @@ window.onload=function init(){
   }
 
 
-
-}
